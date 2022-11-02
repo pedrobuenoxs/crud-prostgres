@@ -2,9 +2,29 @@ const Seller = require("../model/seller.model");
 
 module.exports = class SellerRepository {
   constructor() {}
-  async create({ name, email }) {
+  async create({
+    id,
+    name,
+    email,
+    password,
+    desc,
+    payment,
+    delivery,
+    tag,
+    wpp,
+  }) {
     try {
-      return await Seller.create({ name, email });
+      return await Seller.create({
+        id,
+        name,
+        email,
+        password,
+        desc,
+        payment,
+        delivery,
+        tag,
+        wpp,
+      });
     } catch (error) {
       return error;
     }
@@ -29,10 +49,13 @@ module.exports = class SellerRepository {
       console.log("get seller by tag");
     } catch (error) {}
   }
-  async getById() {
+  async getById(id) {
     try {
-      console.log("get seller by id");
-    } catch (error) {}
+      console.log(id);
+      return await Seller.findByPk(id);
+    } catch (error) {
+      return error;
+    }
   }
   async delete() {
     try {

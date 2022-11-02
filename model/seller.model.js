@@ -3,8 +3,7 @@ const sequelize = require("../config/database");
 
 const Seller = sequelize.define("seller", {
   id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
+    type: DataTypes.STRING,
     allowNull: false,
     primaryKey: true,
   },
@@ -14,6 +13,31 @@ const Seller = sequelize.define("seller", {
   },
   email: {
     type: DataTypes.STRING,
+    allowNull: false,
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  desc: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  payment: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  delivery: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  tag: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  wpp: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
   },
 });
 
