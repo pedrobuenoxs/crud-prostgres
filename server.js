@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const { user } = require("pg/lib/defaults");
 const sequelize = require("./config/database");
 
 //fazer conexão com o banco de dados
@@ -10,55 +11,45 @@ try {
   console.error("Unable to connect to the database:", error);
 }
 
-const SellerRepository = require("./repository/user.repository");
+const ProductRepository = require("./repository/product.repository");
+const repository = new ProductRepository();
 
-const repository = new SellerRepository();
-
-const payment = {
-  1: "Dinheiro",
-  2: "Cartão",
-  4: "Pix",
-};
-
-const delivery = {
-  1: "Entrega",
-  2: "Retirada",
-  3: "Delivery",
-};
-
-const tag = {
-  1: "Frutas",
-  2: "Granja",
-  3: "Horta",
-  4: "Carnes",
-  5: "Laticinios",
-  6: "Outros",
-};
-
-// repository
-//   .create({
-//     id: 10,
-//     name: "pedro",
-//     email: "pedro@email.com",
-//     password: "123456",
-//     desc: "vendedor de produtos",
-//     payment: 1,
-//     delivery: 1,
-//     tag: 1,
-//     wpp: 1,
-//   })
-
-//   .then((data) => {
-//     console.log(data.errors);
-//     sequelize.close();
-//   });
-
-// repository.getAll().then((data) => {
-//   console.log(data);
-//   sequelize.close();
-// });
-
-repository.getById("10").then((data) => {
-  console.log(data);
-  sequelize.close();
+repository.getById("c1bab5d2-62bf-4f93-bc28-3988c34296b2").then((product) => {
+  product.map((p) => {
+    console.log(p.dataValues);
+  });
 });
+
+const product = {
+  id: "c1bab5d2-62bf-4f93-bc28-3988c34296b2",
+  name: "Melancia",
+  price: 0.5,
+  measure: "unidade",
+  status: 1,
+  category: "frutas",
+};
+
+repository.create(product).then((products) => {
+  console.log(products);
+});
+
+// -----------------------------
+
+// const SellerRepository = require("./repository/seller.repository");
+// const sellerrepository = new SellerRepository();
+
+// sellerrepository
+//   .create({
+//     id: "c1bab5d2-62bf-4f93-bc28-3988c34296b2",
+//     name: "Horta do Pedro",
+//     desc: "Aqui você encontra as melhores hortalicas",
+//     email: "horti@email.com",
+//     password: "anypassword",
+//     delivery: 101,
+//     payment: 0,
+//     tag: 5,
+//     wpp: 0,
+//   })
+//   .then((seller) => {
+//     console.log(seller);
+//   });

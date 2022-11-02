@@ -1,12 +1,16 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
-const Seller = sequelize.define("seller", {
+const Product = sequelize.define("product", {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
-    allowNull: false,
+    allowNuSequelizell: false,
     primaryKey: true,
+  },
+  id_seller: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   name: {
     type: DataTypes.STRING,
@@ -15,9 +19,15 @@ const Seller = sequelize.define("seller", {
   price: {
     type: DataTypes.DECIMAL,
   },
-  description: {
+  measure: {
+    type: DataTypes.STRING,
+  },
+  status: {
+    type: DataTypes.INTEGER,
+  },
+  category: {
     type: DataTypes.STRING,
   },
 });
-
-module.exports = Seller;
+// Product.sync();
+module.exports = Product;

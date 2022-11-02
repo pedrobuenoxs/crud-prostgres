@@ -2,29 +2,11 @@ const Seller = require("../model/seller.model");
 
 module.exports = class SellerRepository {
   constructor() {}
-  async create({
-    id,
-    name,
-    email,
-    password,
-    desc,
-    payment,
-    delivery,
-    tag,
-    wpp,
-  }) {
+  async create(data) {
+    const { id, name, email, password, desc, payment, delivery, tag, wpp } =
+      data;
     try {
-      return await Seller.create({
-        id,
-        name,
-        email,
-        password,
-        desc,
-        payment,
-        delivery,
-        tag,
-        wpp,
-      });
+      return await Seller.create(data);
     } catch (error) {
       return error;
     }
